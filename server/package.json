@@ -5,12 +5,13 @@
   "author": "<Jerry Nwosu> <jerrynwosu007@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/app.js",
-    "dev": "nodemon --exec ts-node src/app.ts",
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
     "test": ""
   },
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/node": "^18.15.11",
     "nodemon": "^2.0.22",
@@ -18,6 +19,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongoose": "^7.0.3"
   }
