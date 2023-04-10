@@ -1,15 +1,13 @@
 import { Request, Response } from 'express';
-import { UserDao, UserDto } from '..';
-import { UserModel } from '../models/user.model';
+import { UserService } from '..';
 
 export class UserController {
-  private userDao = new UserDao(UserModel);
+  private userService = new UserService();
 
   public async getAllUsers(req: Request, res: Response) {
     try {
-      const users = await this.userDao.getAllUsers();
-      const userDtos = users.map((user) => new UserDto(user));
-      res.status(200).json(userDtos);
+      const users = await this.userService.getAllUsers();
+      res.status(200).json(users);
     } catch (err) {
       res.status(500).send('Internal server error');
     }

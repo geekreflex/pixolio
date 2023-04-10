@@ -1,9 +1,9 @@
 import { Model } from 'mongoose';
-import { User } from '../models/user.model';
+import { User, UserModel } from '../models/user.model';
 import { UserDto } from '../dto/user.dto';
 
 export class UserDao {
-  constructor(private readonly userModel: Model<User>) {}
+  private readonly userModel: Model<User> = UserModel;
 
   async getAllUsers(): Promise<UserDto[]> {
     const users = await this.userModel.find().lean().exec();
