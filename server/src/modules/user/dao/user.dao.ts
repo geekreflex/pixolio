@@ -1,12 +1,22 @@
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import { User, UserModel } from '../models/user.model';
 import { UserDto } from '../dto/user.dto';
 
 export class UserDao {
-  private readonly userModel: Model<User> = UserModel;
+  private userModel: Model<User>;
 
-  async getAllUsers(): Promise<UserDto[]> {
-    const users = await this.userModel.find().lean().exec();
-    return users.map((user) => new UserDto(user));
+  constructor() {
+    this.userModel = UserModel;
+  }
+
+  public async createUser(user: UserDto): Promise<ObjectId> {
+    const newUser = new this.userModel({ ...user });
+    await newUser.save();
+    return newUser._id;
+  }
+
+  public async getAllUsers() {
+    const users = await this.userModel.find().exec();
+    return users;
   }
 }

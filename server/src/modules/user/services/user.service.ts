@@ -1,10 +1,19 @@
 import { UserDao, UserDto } from '..';
 
 export class UserService {
-  private userDao = new UserDao();
+  private userDao: UserDao;
 
-  async getAllUsers(): Promise<UserDto[]> {
+  constructor() {
+    this.userDao = new UserDao();
+  }
+
+  public async getAllUsers() {
     const users = await this.userDao.getAllUsers();
     return users;
+  }
+
+  public async createUser(resource: UserDto): Promise<string> {
+    const userId = this.userDao.createUser(resource);
+    return userId.toString();
   }
 }
