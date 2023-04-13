@@ -19,4 +19,9 @@ export class UserDao {
     const users = await this.userModel.find().exec();
     return users;
   };
+
+  public isUsernameExits = async (username: string): Promise<boolean> => {
+    const user = await this.userModel.findOne({ username });
+    return !!user;
+  };
 }
