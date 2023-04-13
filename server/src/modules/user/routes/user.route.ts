@@ -11,10 +11,10 @@ export class UserRoute {
     this.initializeRoutes();
   }
 
-  private initializeRoutes() {
+  private initializeRoutes = () => {
     this.router
       .route(`/`)
       .get(this.userController.getAllUsers)
       .post(this.userController.createUser);
-  }
+  };
 }

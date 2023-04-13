@@ -9,14 +9,14 @@ export class UserDao {
     this.userModel = UserModel;
   }
 
-  public async createUser(user: UserDto): Promise<ObjectId> {
+  public createUser = async (user: UserDto): Promise<ObjectId> => {
     const newUser = new this.userModel({ ...user });
     await newUser.save();
     return newUser._id;
-  }
+  };
 
-  public async getAllUsers() {
+  public getAllUsers = async () => {
     const users = await this.userModel.find().exec();
     return users;
-  }
+  };
 }

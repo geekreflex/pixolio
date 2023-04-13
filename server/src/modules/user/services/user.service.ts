@@ -7,13 +7,13 @@ export class UserService {
     this.userDao = new UserDao();
   }
 
-  public async getAllUsers() {
+  public getAllUsers = async () => {
     const users = await this.userDao.getAllUsers();
     return users;
-  }
+  };
 
-  public async createUser(resource: UserDto): Promise<string> {
+  public createUser = async (resource: UserDto): Promise<string> => {
     const userId = this.userDao.createUser(resource);
     return userId.toString();
-  }
+  };
 }
