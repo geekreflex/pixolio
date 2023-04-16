@@ -4,3 +4,4 @@ export { UserController } from './controllers/user.controller';
 export { UserRoute } from './routes/user.route';
 export { UserService } from './services/user.service';
 export { UserMiddleware } from './middleware/user.middleware';
+export { User } from './models/user.model';

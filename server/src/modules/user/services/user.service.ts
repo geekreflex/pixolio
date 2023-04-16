@@ -7,14 +7,14 @@ export class UserService {
     this.userDao = new UserDao();
   }
 
-  public createUser = async (user: UserDto): Promise<string> => {
-    const username = this.generateUsername(user.email);
+  public createUser = async (resource: UserDto) => {
+    const username = this.generateUsername(resource.email);
     const newUser = {
-      ...user,
+      ...resource,
       username,
     };
-    const userId = this.userDao.createUser(newUser);
-    return userId.toString();
+    const user = await this.userDao.createUser(newUser);
+    return user;
   };
 
   public getAllUsers = async () => {
@@ -24,6 +24,11 @@ export class UserService {
 
   public getUserById = async (userId: string) => {
     const user = await this.userDao.getUserById(userId);
+    return user;
+  };
+
+  public getUserByEmail = async (email: string) => {
+    const user = await this.userDao.getUserByEmail(email);
     return user;
   };
 

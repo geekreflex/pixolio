@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { AnyZodObject } from 'zod';
 import { respond, ResponseCode } from '../../../utils/response';
 
-const validateResource =
+export const validateResource =
   (schema: AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -15,5 +15,3 @@ const validateResource =
       respond(res, err.errors, 'Error validation', ResponseCode.BAD_REQUEST);
     }
   };
-
-export default validateResource;

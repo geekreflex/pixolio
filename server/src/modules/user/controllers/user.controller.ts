@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { UserService } from '..';
+import { ResponseCode, respond } from '../../../utils/response';
+import { JwtUtils } from '../../../utils';
 
 export class UserController {
   private userService: UserService;
@@ -10,10 +12,16 @@ export class UserController {
 
   public createUser = async (req: Request, res: Response) => {
     try {
-      const userId = await this.userService.createUser(req.body);
-      res.status(200).json({ id: userId });
+      const user = await this.userService.createUser(req.body);
+      const token = JwtUtils.createJWT(user);
+      respond(res, { user, token }, '');
     } catch (err) {
-      res.status(500).send('Error');
+      respond(
+        res,
+        {},
+        'Internal server error',
+        ResponseCode.INTERNAL_SERVER_ERROR
+      );
     }
   };
 
@@ -21,8 +29,14 @@ export class UserController {
     try {
       const users = await this.userService.getAllUsers();
       res.status(200).json(users);
+      respond(res, users, '');
     } catch (err) {
-      res.status(500).send('Internal server error');
+      respond(
+        res,
+        {},
+        'Internal server errror',
+        ResponseCode.INTERNAL_SERVER_ERROR
+      );
     }
   };
 }

@@ -9,10 +9,10 @@ export class UserDao {
     this.userModel = UserModel;
   }
 
-  public createUser = async (user: UserDto): Promise<ObjectId> => {
+  public createUser = async (user: UserDto) => {
     const newUser = new this.userModel({ ...user });
     await newUser.save();
-    return newUser._id;
+    return newUser;
   };
 
   public getAllUsers = async () => {

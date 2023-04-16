@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { UserController } from '..';
-import validateResource from '../../common/middleware/validate.resource.middleware';
+import { validateResource } from '../../common';
 import { CreateUserSchema } from '../schema/create.user.schema';
 
 export class UserRoute {
