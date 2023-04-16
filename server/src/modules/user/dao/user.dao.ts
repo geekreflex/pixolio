@@ -31,7 +31,10 @@ export class UserDao {
   };
 
   public getUserByEmailWithPassword = async (email: string) => {
-    const user = await this.userModel.findOne({ email });
+    const user = await this.userModel
+      .findOne({ email })
+      .select('password')
+      .exec();
     return user;
   };
 

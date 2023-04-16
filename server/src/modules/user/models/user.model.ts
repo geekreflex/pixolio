@@ -21,7 +21,7 @@ const userSchema = new Schema<User, UserModel>(
     lastName: { type: String, required: true },
     username: { type: String, required: true },
     email: { type: String, required: true },
-    password: { type: String, required: true, select: true },
+    password: { type: String, required: true, select: false },
   },
   { timestamps: true }
 );
