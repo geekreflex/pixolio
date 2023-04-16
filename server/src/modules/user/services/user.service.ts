@@ -22,6 +22,11 @@ export class UserService {
     return users;
   };
 
+  public getUserById = async (userId: string) => {
+    const user = await this.userDao.getUserById(userId);
+    return user;
+  };
+
   private generateUsername(email: string): string {
     const [username] = email.split('@');
     return username;
