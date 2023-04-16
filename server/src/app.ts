@@ -8,11 +8,9 @@ export class App {
   private readonly app: Application;
   private userRoute: UserRoute;
   private authRoute: AuthRoutes;
-  private db: Database;
 
   constructor() {
     this.app = express();
-    this.db = new Database();
     this.userRoute = new UserRoute();
     this.authRoute = new AuthRoutes();
 
@@ -31,13 +29,21 @@ export class App {
   }
 
   public async start(port: number): Promise<void> {
-    try {
+    const db = new Database();
+    db.connectWithRetry().then(() => {
       this.app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
       });
-      this.db.connectWithRetry();
-    } catch (error) {
-      console.error('Error');
-    }
+    });
+
+    process.on('SIGINT', async () => {
+      await db.disconnect();
+      process.exit(0);
+    });
+
+    process.on('SIGTERM', async () => {
+      await db.disconnect();
+      process.exit(0);
+    });
   }
 }

@@ -8,7 +8,7 @@ export class UserMiddleware {
     this.userService = new UserService();
   }
 
-  public validateEmailDoesntExist = async (
+  public isEmailTaken = async (
     req: Request,
     res: Response,
     next: NextFunction
