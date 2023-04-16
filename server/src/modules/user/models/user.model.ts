@@ -1,4 +1,5 @@
 import { Document, Schema, model, Model } from 'mongoose';
+import { boolean } from 'zod';
 
 export interface User extends Document {
   firstName: string;
@@ -8,6 +9,7 @@ export interface User extends Document {
   password: string;
   createdAt: Date;
   updatedAt: Date;
+  emailVerified: boolean;
 }
 
 export interface UserModel extends Model<User> {
@@ -22,6 +24,7 @@ const userSchema = new Schema<User, UserModel>(
     username: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true, select: false },
+    emailVerified: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
