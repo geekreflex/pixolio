@@ -20,7 +20,7 @@ export class AuthMiddleware {
     );
     if (user) {
       const passwordHash = user.password;
-      if (await argon2.verify(passwordHash, req.body.pasasword)) {
+      if (await argon2.verify(passwordHash, req.body.password)) {
         req.body = {
           userId: user.id,
           email: user.email,
