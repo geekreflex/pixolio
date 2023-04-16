@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { UserController } from '..';
+import validateResource from '../../common/middleware/validate.resource.middleware';
+import { CreateUserSchema } from '../schema/create.user.schema';
 
 export class UserRoute {
   public router: Router;
@@ -14,7 +16,7 @@ export class UserRoute {
   private initializeRoutes = () => {
     this.router
       .route(`/`)
-      .get(this.userController.getAllUsers)
+      .get(validateResource(CreateUserSchema), this.userController.getAllUsers)
       .post(this.userController.createUser);
   };
 }
