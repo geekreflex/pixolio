@@ -15,7 +15,9 @@ export class AuthMiddleware {
     res: Response,
     next: NextFunction
   ) => {
-    const user: any = await this.userService.getUserByEmail(req.body.email);
+    const user: any = await this.userService.getUserByEmailWithPassword(
+      req.body.email
+    );
     if (user) {
       const passwordHash = user.password;
       if (await argon2.verify(passwordHash, req.body.pasasword)) {

@@ -30,6 +30,11 @@ export class UserDao {
     return user;
   };
 
+  public getUserByEmailWithPassword = async (email: string) => {
+    const user = await this.userModel.findOne({ email });
+    return user;
+  };
+
   public isUsernameExits = async (username: string): Promise<boolean> => {
     const user = await this.userModel.findOne({ username });
     return !!user;

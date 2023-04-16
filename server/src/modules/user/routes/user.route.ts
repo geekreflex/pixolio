@@ -16,7 +16,7 @@ export class UserRoute {
   private initializeRoutes = () => {
     this.router
       .route(`/`)
-      .get(validateResource(CreateUserSchema), this.userController.getAllUsers)
-      .post(this.userController.createUser);
+      .get(this.userController.getAllUsers)
+      .post(validateResource(CreateUserSchema), this.userController.createUser);
   };
 }

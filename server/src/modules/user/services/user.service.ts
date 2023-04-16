@@ -32,6 +32,11 @@ export class UserService {
     return user;
   };
 
+  public getUserByEmailWithPassword = async (email: string) => {
+    const user = await this.userDao.getUserByEmailWithPassword(email);
+    return user;
+  };
+
   private generateUsername(email: string): string {
     const [username] = email.split('@');
     return username;

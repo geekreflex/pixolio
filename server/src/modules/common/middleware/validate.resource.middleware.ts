@@ -11,6 +11,7 @@ export const validateResource =
         query: req.query,
         params: req.params,
       });
+      next();
     } catch (err: any) {
       respond(res, err.errors, 'Error validation', ResponseCode.BAD_REQUEST);
     }
