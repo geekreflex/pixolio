@@ -29,12 +29,12 @@ export class UserRoute {
       );
 
     this.router
-      .route(`/:username`)
+      .route(`/:username/username`)
       .all(this.userMiddleware.checkUserExistsByUsername)
       .get(this.userController.getUserByUsername);
 
     this.router
-      .route(`/:userId`)
+      .route(`/:userId/id`)
       .all(this.jwtMiddleware.validJWTNeeded)
       .put(
         validateResource(UpdateUserSchema),

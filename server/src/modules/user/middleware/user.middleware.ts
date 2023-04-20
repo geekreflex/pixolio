@@ -34,4 +34,10 @@ export class UserMiddleware {
       respond(res, {}, 'User not found', ResponseCode.NOT_FOUND);
     }
   };
+
+  public checkUserExitsById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {};
 }
