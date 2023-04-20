@@ -31,6 +31,17 @@ export class UserController {
     }
   };
 
+  public getUserByUsername = async (req: Request, res: Response) => {
+    try {
+      const user = await this.userService.getUserByUsername(
+        req.params.username
+      );
+      respond(res, user, '');
+    } catch (err) {
+      respond(res, {}, '', ResponseCode.INTERNAL_SERVER_ERROR);
+    }
+  };
+
   public updateUserById = async (req: Request, res: Response) => {
     try {
       // update user here

@@ -22,7 +22,7 @@ export class UserMiddleware {
     }
   };
 
-  public checkUserExistByUsername = async (
+  public checkUserExistsByUsername = async (
     req: Request,
     res: Response,
     next: NextFunction

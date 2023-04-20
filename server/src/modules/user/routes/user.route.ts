@@ -28,7 +28,10 @@ export class UserRoute {
         this.userController.createUser
       );
 
-    this.router.route(`/:username`).all().get();
+    this.router
+      .route(`/:username`)
+      .all(this.userMiddleware.checkUserExistsByUsername)
+      .get(this.userController.getUserByUsername);
 
     this.router
       .route(`/:userId`)
