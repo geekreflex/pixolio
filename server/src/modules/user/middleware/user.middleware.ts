@@ -21,4 +21,17 @@ export class UserMiddleware {
       next();
     }
   };
+
+  public checkUserExistByUsername = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const user = await this.userService.getUserByUsername(req.params.username);
+    if (user) {
+      next();
+    } else {
+      respond(res, {}, 'User not found', ResponseCode.NOT_FOUND);
+    }
+  };
 }
