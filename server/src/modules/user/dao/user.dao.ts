@@ -1,6 +1,6 @@
-import { Model, ObjectId } from 'mongoose';
-import { User, UserModel } from '../models/user.model';
-import { UserDto } from '../dto/user.dto';
+import { Model } from 'mongoose';
+import { User, UserModel } from '..';
+import { UserDto } from '..';
 
 export class UserDao {
   private userModel: Model<User>;
@@ -36,6 +36,14 @@ export class UserDao {
       .select('password')
       .exec();
     return user;
+  };
+
+  public updateUserById = async (userId: string, resource: UserDto) => {
+    const existingUser = await this.userModel
+      .findOneAndUpdate({ id: userId }, { $set: resource }, { new: true })
+      .exec();
+
+    return existingUser;
   };
 
   public isUsernameExits = async (username: string): Promise<boolean> => {
