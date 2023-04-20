@@ -28,9 +28,14 @@ export class UserRoute {
         this.userController.createUser
       );
 
+    this.router.route(`/:username`).all().get();
+
     this.router
-      .route(`/:username`)
+      .route(`/:userId`)
       .all(this.jwtMiddleware.validJWTNeeded)
-      .put(validateResource(UpdateUserSchema), this.userController.updateUser);
+      .put(
+        validateResource(UpdateUserSchema),
+        this.userController.updateUserById
+      );
   };
 }

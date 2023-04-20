@@ -31,7 +31,7 @@ export class UserController {
     }
   };
 
-  public updateUser = async (req: Request, res: Response) => {
+  public updateUserById = async (req: Request, res: Response) => {
     try {
       // update user here
     } catch (err) {

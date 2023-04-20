@@ -32,6 +32,11 @@ export class UserService {
     return user;
   };
 
+  public getUserByUsername = async (username: string) => {
+    const user = await this.userDao.getUserByUsername(username);
+    return user;
+  };
+
   // Update any to your resource prop
   public updateUserById = async (userId: string, resource: any) => {
     const user = await this.userDao.updateUserById(userId, resource);
