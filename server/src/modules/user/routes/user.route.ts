@@ -1,17 +1,20 @@
 import { Router } from 'express';
 import { UserController, UserMiddleware } from '..';
 import { validateResource } from '../../common';
-import { CreateUserSchema } from '../schema/create.user.schema';
+import { CreateUserSchema, UpdateUserSchema } from '../schema';
+import { JwtMiddleware } from '../../auth';
 
 export class UserRoute {
   public router: Router;
   private userController: UserController;
   private userMiddleware: UserMiddleware;
+  private jwtMiddleware: JwtMiddleware;
 
   constructor() {
     this.router = Router();
     this.userController = new UserController();
     this.userMiddleware = new UserMiddleware();
+    this.jwtMiddleware = new JwtMiddleware();
     this.initializeRoutes();
   }
 
@@ -24,5 +27,10 @@ export class UserRoute {
         this.userMiddleware.checkEmailTaken,
         this.userController.createUser
       );
+
+    this.router
+      .route(`/:username`)
+      .all(this.jwtMiddleware.validJWTNeeded)
+      .put(validateResource(UpdateUserSchema), this.userController.updateUser);
   };
 }

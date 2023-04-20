@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { UserService } from '..';
 import { ResponseCode, respond } from '../../../utils/response';
-import { JwtUtils } from '../../../utils';
+import { JwtUtils } from '../../auth';
 import * as argon2 from 'argon2';
 
 export class UserController {
@@ -18,12 +18,7 @@ export class UserController {
       const token = JwtUtils.createJWT(user);
       respond(res, { token }, '');
     } catch (err) {
-      respond(
-        res,
-        {},
-        'Internal server error',
-        ResponseCode.INTERNAL_SERVER_ERROR
-      );
+      respond(res, {}, '', ResponseCode.INTERNAL_SERVER_ERROR);
     }
   };
 
@@ -32,12 +27,15 @@ export class UserController {
       const users = await this.userService.getAllUsers();
       respond(res, users, '');
     } catch (err) {
-      respond(
-        res,
-        {},
-        'Internal server errror',
-        ResponseCode.INTERNAL_SERVER_ERROR
-      );
+      respond(res, {}, '', ResponseCode.INTERNAL_SERVER_ERROR);
+    }
+  };
+
+  public updateUser = async (req: Request, res: Response) => {
+    try {
+      // update user here
+    } catch (err) {
+      respond(res, {}, '', ResponseCode.INTERNAL_SERVER_ERROR);
     }
   };
 }

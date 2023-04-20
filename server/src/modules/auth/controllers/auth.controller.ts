@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { JwtUtils } from '../../../utils';
+import { JwtUtils } from '..';
 import { ResponseCode, respond } from '../../../utils/response';
 
 export class AuthController {
